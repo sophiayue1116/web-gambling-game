@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="bet.css"/>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <p>Gambling Site</p>
+  </div>
+  <div class="pagebody">
+    <div class="upper">
+      <div class = "bet">
+        <div class="title-name">
+          place your bet on dice number (1 to 6)
+        </div>
+        <form action="/bet" method='post'>
+          <div class="row">
+            <div class="input-name">
+              bet money
+            </div>
+            <div class="input-num">
+              <input type="text" name="stake"></input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-name">
+              on
+            </div>
+            <div class="input-num">
+              <input type='text' name='number'></input>
+            </div>
+          </div>
+          <br/>
+          <div class="button">
+            <input type='submit' name='bet_submit' value="bet"></input>
+            <br/>
+            <br/>
+          </div>
+        </form>
+      </div>
+      <div class = "session-summary">
+        <form action="/bet" method='get'>
+          <div class="row">
+            <div class="get-name">
+              total win
+            </div>
+            <div class="get-text">
+              <input type="text" name="win" value=<%= @win %>></input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="get-name">
+              total loss
+            </div>
+            <div class="get-text">
+              <input type='text' name='loss' value=<%= @lost %>></input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="get-name">
+              total profit
+            </div>
+            <div class="get-text">
+              <input type='text' name='profit' value=<%= @profit %>></input>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class = "bottom-up">
+        <div class="title-name">
+          account
+        </div>
+        <div class = "account-summary">
+          <form action="/logout" method='get'>
+            <div class="col">
+              <div class="get-name">
+                total win
+              </div>
+              <div class="get-text">
+                <input type='text' name='gw_num' value=<%= Gambling.first.win%>></input>
+              </div>
+            </div>
+            <div class="col">
+              <div class="get-name">
+                total loss
+              </div>
+              <div class="get-text">
+                <input type='text' name='gl_num' value=<%= Gambling.first.loss%>></input>
+              </div>
+            </div>
+            <div class="col">
+              <div class="get-name">
+                total profit
+              </div>
+              <div class="get-text">
+                <input type='text' name='gr_num' value=<%= Gambling.first.profit%>></input>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="logout">
+        <form method='get' action = '/logout'>
+          <input type='submit' name='lgo_submit' value="Logout"></input>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
+
+
+
