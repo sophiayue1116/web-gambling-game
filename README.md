@@ -6,3 +6,4 @@ In this project, Sinatra web development framework is used to implement a simple
 ## Login information
 Username: Sophie
 Password: 2020!
+
