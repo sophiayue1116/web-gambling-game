@@ -29,7 +29,6 @@ post '/login' do
   if params[:username] == Gambling.first.username &&
      params[:password] == Gambling.first.password
      session[:admin] = true
-     puts 15
      redirect to ('/bet')
   else
      erb :login
