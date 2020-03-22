@@ -1,7 +1,11 @@
 require 'sinatra'
-require_relative 'gambling'
+#require_relative 'gambling'
 
-enable :sessions
+configure do
+  enable :sessions
+  set :username, "Sophie" 
+  set :password, "2020!"
+end
 
 configure :development do
   DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/gambling.db")
