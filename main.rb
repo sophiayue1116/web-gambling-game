@@ -22,7 +22,6 @@ get '/login' do
 end
 
 post '/login' do
-#  puts 15
   if params[:username] == Gambling.first.username &&
      params[:password] == Gambling.first.password
      session[:admin] = true
@@ -66,17 +65,15 @@ def save_session(win_lost, money)
 end
 
 get '/logout' do
-  # write to db
-    model = Gambling.first
-    if model
-      model.update(win: model.win + session[:win])
-      model.update(loss: model.loss + session[:lost])
-      model.update(profit: model.profit + session[:win] - session[:lost])
-    else
-      model = Model.create(win: 0)
-      model = Model.create(loss: 0)
-      model = Model.create(profit: 0)
-    end
+  model = Gambling.first
+  if model
+    model.update(win: model.win + session[:win])
+    model.update(loss: model.loss + session[:lost])
+    model.update(profit: model.profit + session[:win] - session[:lost])
+  else
+    model = Model.create(win: 0)
+    model = Model.create(loss: 0)
+    model = Model.create(profit: 0)
   end
   session.clear
   redirect to ('/login')
