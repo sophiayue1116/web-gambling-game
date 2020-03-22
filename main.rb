@@ -5,12 +5,10 @@ enable :sessions
 
 configure :development do
   DataMapper.setup(:default, sqlite3://#{Dir.pwd}/gambling.db)
-  DataMapper.auto_migrate!
 end
 
 configure :production do
   DataMapper.setup(:default, ENV[DATABASE_URL])
-  DataMapper.auto_migrate!
 end
 
 get '/' do
