@@ -4,11 +4,13 @@ require_relative 'gambling'
 enable :sessions
 
 configure :development do
-  DataMapper.setup(:default, sqlite3://#{Dir.pwd}/gambling.db)
+  DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/gambling.db")
+  DataMapper.auto_migrate!
 end
 
 configure :production do
-  DataMapper.setup(:default, ENV[DATABASE_URL])
+  DataMapper.setup(:default, ENV['DATABASE_URL'])
+  DataMapper.auto_migrate!
 end
 
 get '/' do
@@ -40,18 +42,12 @@ post '/bet' do
       save_session(:lost, 0)
     end
     save_session(:win, 10*stake)
-    %{<h1>the dice landed on #{roll}, you win #{10*stake} dollars</h1>
-      total win #{session[:win]} dollars, total lost: #{session[:lost]},
-      profit: #{session[:win] - session[:lost]}
 }
   else
     if(!session[:win])
       save_session(:win, 0)
     end
     save_session(:lost, stake)
-    %{<h1>the dice landed on #{roll}, you lost #{stake} dollars</h1>
-      total win #{session[:win]} dollars, total lost: #{session[:lost]},
-      profit: #{session[:win] - session[:lost]}
 }
   @win = session[:win]
   @lost = session[:lost]
@@ -62,9 +58,6 @@ end
 
 get '/bet' do
   erb :bet
-  #@win = 0
-  #@lost = 0
-  #@profit = 0
 end
 
 
@@ -75,7 +68,6 @@ def save_session(win_lost, money)
 end
 
 get '/logout' do
-  if session[:win]
   # write to db
     model = Gambling.first
     if model
