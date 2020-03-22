@@ -42,17 +42,15 @@ post '/bet' do
       save_session(:lost, 0)
     end
     save_session(:win, 10*stake)
-}
   else
     if(!session[:win])
       save_session(:win, 0)
     end
     save_session(:lost, stake)
-}
+  end
   @win = session[:win]
   @lost = session[:lost]
   @profit = session[:win] - session[:lost]
-  end
   erb :bet
 end
 
